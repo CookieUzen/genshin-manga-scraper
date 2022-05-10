@@ -8,6 +8,7 @@ import sys
 from bs4 import BeautifulSoup
 
 URL = sys.argv[1]
+NAME = sys.argv[2]
 page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, "html.parser")
@@ -21,7 +22,7 @@ for i in images:
     else:
         url.append(i['data-src'])
 
-with zipfile.ZipFile("chapter.cbz", 'w') as zip_f:
+with zipfile.ZipFile(NAME, 'w') as zip_f:
     for i in range(len(url)):
         print("Page " + str(i) + ": " + url[i])
         filename = str(i)+".jpg"
